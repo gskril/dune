@@ -2,14 +2,14 @@
 
 A few helper functions that make the [Dune Analytics API](https://dune.com/docs/api/) easier to use.
 
-## Available functions
+## Example
 
 ```js
-const dune = new Dune(API_KEY)
+const dune = new Dune('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
 
-dune.execute(queryId)
-dune.status(executionId)
-dune.results(executionId)
+const execute = await dune.execute(1258228)
+const status = await dune.status(execute.execution_id)
+const data = await dune.results(execute.execution_id)
 ```
 
 Includes types for all API responses.
