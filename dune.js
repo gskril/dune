@@ -42,5 +42,38 @@ export default class Dune {
         },
       }).then((res) => res.json())
     }
+
+    /**
+     * Execute a query
+     * @param {number} query_id Dune Analytics query id
+     * @returns {Object} Execution id and state
+     */
+    this.execute = async function (query_id) {
+      const endpoint = this.buildEndpoint('execute', query_id)
+      const res = await this.fetch(endpoint)
+      return res
+    }
+
+    /**
+     * Check the status of an execution
+     * @param {number} execution_id Dune Analytics execution id
+     * @returns {Object} Status of execution
+     */
+    this.status = async function (execution_id) {
+      const endpoint = this.buildEndpoint('status', execution_id)
+      const res = await this.fetch(endpoint)
+      return res
+    }
+
+    /**
+     * Fetch the results of an execution
+     * @param {number} execution_id Dune Analytics execution id
+     * @returns {Object} Results of execution including row data
+     */
+    this.results = async function (execution_id) {
+      const endpoint = this.buildEndpoint('results', execution_id)
+      const res = await this.fetch(endpoint)
+      return res
+    }
   }
 }
