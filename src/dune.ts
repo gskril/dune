@@ -1,11 +1,12 @@
 import fetch from 'node-fetch'
+import { ExecuteQuery, ExecutionStatus, ExecutionResult } from './types'
 
 export default class Dune {
   buildEndpoint: (endpoint: string, id: string) => string
   fetch: (endpoint: string) => Promise<any>
-  execute: (query_id: string) => Promise<any>
-  status: (execution_id: string) => Promise<any>
-  results: (execution_id: string) => Promise<any>
+  execute: (query_id: string | number) => Promise<ExecuteQuery>
+  status: (execution_id: string) => Promise<ExecutionStatus>
+  results: (execution_id: string) => Promise<ExecutionResult>
 
   constructor(API_KEY: string | undefined) {
     if (!API_KEY) {
@@ -59,7 +60,7 @@ export default class Dune {
      * @returns {Object} Execution id and state
      */
     this.execute = async function (query_id) {
-      const endpoint = this.buildEndpoint('execute', query_id)
+      const endpoint = this.buildEndpoint('execute', query_id.toString())
       const res = await this.fetch(endpoint)
       return res
     }
