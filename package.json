@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "./dist/example.js",
   "scripts": {
-    "start": "node ./dist/example.js",
+    "start": "tsc && node ./dist/example.js",
     "build": "tsc",
     "clean": "rm -rf ./dist"
   },
