@@ -34,7 +34,7 @@ export default class Dune {
      * @param {string} endpoint API endpoint
      * @returns Dune Analytics response
      */
-    this.fetchDune = async function (endpoint) {
+    this.fetch = async function (endpoint) {
       return await fetch(endpoint, {
         method: endpoint.includes('execute') ? 'POST' : 'GET',
         headers: {
