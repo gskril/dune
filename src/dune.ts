@@ -1,7 +1,17 @@
 import fetch from 'node-fetch'
 
 export default class Dune {
-  constructor(API_KEY) {
+  buildEndpoint: (endpoint: string, id: string) => string
+  fetch: (endpoint: string) => Promise<any>
+  execute: (query_id: string) => Promise<any>
+  status: (execution_id: string) => Promise<any>
+  results: (execution_id: string) => Promise<any>
+
+  constructor(API_KEY: string | undefined) {
+    if (!API_KEY) {
+      throw new Error('API_KEY is required')
+    }
+
     /**
      * All endpoints start with https://api.dune.com/api/v1/
      * To execute a query, append `{query_id}/execute`
@@ -40,7 +50,7 @@ export default class Dune {
         headers: {
           'x-dune-api-key': API_KEY,
         },
-      }).then((res) => res.json())
+      }).then((res: any) => res.json())
     }
 
     /**
