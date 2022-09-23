@@ -1,10 +1,11 @@
 {
   "name": "dune",
   "version": "0.0.1",
-  "main": "./dist/index.js",
+  "main": "./dist/example.js",
   "scripts": {
-    "start": "node ./dist/index.js",
-    "build": "tsc"
+    "start": "node ./dist/example.js",
+    "build": "tsc",
+    "clean": "rm -rf ./dist"
   },
   "type": "module",
   "license": "ISC",
