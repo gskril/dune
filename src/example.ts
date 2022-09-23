@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import Dune from './dune.js'
+import Dune from './index.js'
 
 const dune = new Dune(process.env.API_KEY)
 
