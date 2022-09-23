@@ -1,0 +1,14 @@
+{
+  "name": "dune",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "node-fetch": "^3.2.10"
+  }
+}
