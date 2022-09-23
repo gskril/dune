@@ -1,11 +1,17 @@
 {
   "name": "dune",
   "version": "0.0.1",
-  "main": "./dist/example.js",
+  "author": "Greg Skriloff",
+  "keywords": [
+    "Dune Analytics",
+    "Ethereum"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "start": "tsc && node ./dist/example.js",
     "build": "tsc",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
   "license": "ISC",
