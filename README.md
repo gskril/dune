@@ -1,5 +1,7 @@
 # Dune Analytics API Client
 
+[![npm](https://img.shields.io/npm/v/dune-api-client)](https://www.npmjs.com/package/dune-api-client)
+
 A minimal typescript client for interacting with the [Dune Analytics API](https://dune.com/docs/api/).
 
 ## Example
