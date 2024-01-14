@@ -1,15 +1,21 @@
-# Dune Analytics API Wrapper
+# Dune Analytics API Client
 
-A few helper functions that make the [Dune Analytics API](https://dune.com/docs/api/) easier to use.
+A minimal typescript client for interacting with the [Dune Analytics API](https://dune.com/docs/api/).
 
 ## Example
 
-```js
+```typescript
+import { Dune } from 'dune-api-client'
+
 const dune = new Dune('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
 
-const execute = await dune.execute(1258228)
-const status = await dune.status(execute.execution_id)
-const data = await dune.results(execute.execution_id)
-```
+type DuneData = {
+  rank: number
+  username: string
+  followers: number
+}
 
-Includes types for all API responses.
+const execute = await dune.execute(3224138)
+const status = await dune.status(execute.execution_id)
+const data = await dune.results<DuneData>(execute.execution_id)
+```
