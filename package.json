@@ -1,5 +1,5 @@
 {
-  "name": "dune",
+  "name": "dune-client",
   "version": "0.0.1",
   "author": "Greg Skriloff",
   "keywords": [
@@ -10,16 +10,13 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf ./dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf ./dist"
   },
   "type": "module",
   "license": "ISC",
-  "dependencies": {
-    "node-fetch": "^3.2.10"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/node": "^18.7.18",
-    "typescript": "^4.8.3"
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
   }
 }
