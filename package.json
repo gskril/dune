@@ -6,6 +6,10 @@
     "Dune Analytics",
     "Ethereum"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gskril/dune.git"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
