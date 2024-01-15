@@ -14,7 +14,9 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "prepack": "yarn run build",
+    "prepublishOnly": "yarn version --patch"
   },
   "type": "module",
   "license": "ISC",
