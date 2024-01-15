@@ -18,30 +18,22 @@ export class Dune {
    * To fetch the data, append `execution/{execution_id}/results`
    * @param endpoint Type of data to fetch
    * @param id query id or execution id
-   * @returns Dune Analytics API endpoint
+   * @returns Dune API endpoint
    */
   private buildEndpoint(endpoint: string, id: number | string): string {
     const base = 'https://api.dune.com/api/v1'
-    switch (endpoint) {
-      case 'execute': {
-        return `${base}/query/${id}/execute`
-      }
-      case 'status': {
-        return `${base}/execution/${id}/status`
-      }
-      case 'results': {
-        return `${base}/execution/${id}/results`
-      }
-      default: {
-        throw new Error('Invalid endpoint')
-      }
+
+    if (endpoint === 'execute') {
+      return `${base}/query/${id}/${endpoint}`
+    } else {
+      return `${base}/execution/${id}/${endpoint}`
     }
   }
 
   /**
-   * Wrapper to handle POST and GET requests from the Dune Analytics API
+   * Wrapper to handle POST and GET requests from the Dune API
    * @param endpoint API endpoint
-   * @returns Dune Analytics response
+   * @returns Dune response
    */
   private async fetchDune<T>(endpoint: string): Promise<T> {
     const res = await fetch(endpoint, {
@@ -57,7 +49,7 @@ export class Dune {
 
   /**
    * Execute a query
-   * @param query_id Dune Analytics query id
+   * @param query_id Dune query id
    * @returns Execution id and state
    */
   async execute(query_id: number): Promise<ExecuteQuery> {
@@ -68,8 +60,8 @@ export class Dune {
 
   /**
    * Check the status of an execution
-   * @param {number} execution_id Dune Analytics execution id
-   * @returns {ExecutionStatus} Status of execution
+   * @param execution_id Dune execution id
+   * @returns Status of execution
    */
   async status(execution_id: string): Promise<ExecutionStatus> {
     const endpoint = this.buildEndpoint('status', execution_id)
@@ -79,8 +71,8 @@ export class Dune {
 
   /**
    * Fetch the results of an execution
-   * @param {number} execution_id Dune Analytics execution id
-   * @returns {ExecutionResult} Results of execution including row data
+   * @param execution_id Dune execution id
+   * @returns Results of execution, including row data if available
    */
   async results<T>(execution_id: string): Promise<ExecutionResult<T>> {
     const endpoint = this.buildEndpoint('results', execution_id)
