@@ -30,10 +30,10 @@ export interface ExecutionStatus {
   query_id: number
   state: QueryState
   submitted_at: string
-  execution_started_at: string
 
-  // The following fields are only present when the state is `QUERY_STATE_COMPLETED`
+  // The following fields are not present in all states
   expires_at?: string
+  execution_started_at?: string
   execution_ended_at?: string
   result_metadata?: ResultMetadata
 }
@@ -43,8 +43,10 @@ export interface ExecutionResult<T> {
   query_id: number
   state: QueryState
   submitted_at: string
-  expires_at: string
-  execution_started_at: string
-  execution_ended_at: string
-  result: ExecutionResultData<T>
+
+  // The following fields are not present in all states
+  expires_at?: string
+  execution_started_at?: string
+  execution_ended_at?: string
+  result?: ExecutionResultData<T>
 }

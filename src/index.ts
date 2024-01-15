@@ -5,7 +5,7 @@ export class Dune {
 
   constructor(API_KEY: string | undefined) {
     if (!API_KEY) {
-      throw new Error('Dune Analytics API Key is required')
+      throw new Error('Dune API key is required')
     }
 
     this.API_KEY = API_KEY
