@@ -29,7 +29,10 @@ export class Dune {
   private buildEndpoint(endpoint: Endpoint, id: number | string): string {
     const base = 'https://api.dune.com/api/v1'
 
-    if (endpoint === 'execute') {
+    // regex to check if id is a number, in which case we want to query the latest results
+    const isIdNumber = /^\d+$/.test(id.toString())
+
+    if (endpoint === 'execute' || (endpoint === 'results' && isIdNumber)) {
       return `${base}/query/${id}/${endpoint}`
     } else {
       return `${base}/execution/${id}/${endpoint}`
@@ -91,11 +94,13 @@ export class Dune {
 
   /**
    * Fetch the results of an execution
-   * @param execution_id Dune execution id
+   * @param execution_or_query_id Dune execution id or query id
    * @returns Results of execution, including row data if available
    */
-  async results<T>(execution_id: string): Promise<ExecutionResult<T>> {
-    const endpoint = this.buildEndpoint('results', execution_id)
+  async results<T>(
+    execution_or_query_id: string | number
+  ): Promise<ExecutionResult<T>> {
+    const endpoint = this.buildEndpoint('results', execution_or_query_id)
     const res = await this.fetchDune<ExecutionResult<T>>(endpoint)
     return res
   }
