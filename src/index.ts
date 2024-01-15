@@ -1,4 +1,10 @@
-import { ExecuteQuery, ExecutionStatus, ExecutionResult } from './types'
+import {
+  ExecuteQuery,
+  ExecutionStatus,
+  ExecutionResult,
+  CancelQuery,
+  Endpoint,
+} from './types'
 
 export class Dune {
   private API_KEY: string
@@ -20,7 +26,7 @@ export class Dune {
    * @param id query id or execution id
    * @returns Dune API endpoint
    */
-  private buildEndpoint(endpoint: string, id: number | string): string {
+  private buildEndpoint(endpoint: Endpoint, id: number | string): string {
     const base = 'https://api.dune.com/api/v1'
 
     if (endpoint === 'execute') {
@@ -36,8 +42,11 @@ export class Dune {
    * @returns Dune response
    */
   private async fetchDune<T>(endpoint: string): Promise<T> {
+    const postEndpoints = ['execute', 'cancel']
+    const isPostMethod = postEndpoints.some((e) => endpoint.includes(e))
+
     const res = await fetch(endpoint, {
-      method: endpoint.includes('execute') ? 'POST' : 'GET',
+      method: isPostMethod ? 'POST' : 'GET',
       headers: {
         'x-dune-api-key': this.API_KEY,
       },
@@ -53,8 +62,19 @@ export class Dune {
    * @returns Execution id and state
    */
   async execute(query_id: number): Promise<ExecuteQuery> {
-    const endpoint = this.buildEndpoint('execute', query_id.toString())
+    const endpoint = this.buildEndpoint('execute', query_id)
     const res = await this.fetchDune<ExecuteQuery>(endpoint)
+    return res
+  }
+
+  /**
+   * Cancel an execution
+   * @param execution_id Dune execution id
+   * @returns Success of cancellation
+   */
+  async cancel(execution_id: string): Promise<CancelQuery> {
+    const endpoint = this.buildEndpoint('cancel', execution_id)
+    const res = await this.fetchDune<CancelQuery>(endpoint)
     return res
   }
 

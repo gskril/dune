@@ -25,6 +25,10 @@ export interface ExecuteQuery {
   state: QueryState
 }
 
+export interface CancelQuery {
+  success: boolean
+}
+
 export interface ExecutionStatus {
   execution_id: string
   query_id: number
@@ -50,3 +54,5 @@ export interface ExecutionResult<T> {
   execution_ended_at?: string
   result?: ExecutionResultData<T>
 }
+
+export type Endpoint = 'execute' | 'cancel' | 'status' | 'results'
