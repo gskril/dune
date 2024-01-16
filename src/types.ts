@@ -20,6 +20,10 @@ interface ExecutionResultData<T> {
   metadata: ResultMetadata
 }
 
+export interface ExecuteQueryOptions {
+  params?: Record<string, string | number | Date>
+}
+
 export interface ExecuteQuery {
   execution_id: string
   state: QueryState
@@ -54,5 +58,3 @@ export interface ExecutionResult<T> {
   execution_ended_at?: string
   result?: ExecutionResultData<T>
 }
-
-export type Endpoint = 'execute' | 'cancel' | 'status' | 'results'
