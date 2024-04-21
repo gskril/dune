@@ -58,3 +58,8 @@ export interface ExecutionResult<T> {
   execution_ended_at?: string
   result?: ExecutionResultData<T>
 }
+
+export interface DataOrError<T> {
+  data?: T
+  error?: string
+}
