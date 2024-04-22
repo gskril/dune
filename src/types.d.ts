@@ -1,7 +1,3 @@
-type Prettify<T> = {
-  [K in keyof T]: T[K]
-} & {}
-
 type QueryState =
   | 'QUERY_STATE_PENDING'
   | 'QUERY_STATE_EXECUTING'
@@ -63,7 +59,6 @@ export interface ExecutionResult<T> {
   result?: ExecutionResultData<T>
 }
 
-export type DataOrError<T> = Prettify<{
-  data?: Prettify<T>
-  error?: string
-}>
+export type DataOrError<T> =
+  | { data: T; error?: undefined }
+  | { data?: undefined; error: string }

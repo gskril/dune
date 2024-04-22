@@ -40,7 +40,7 @@ export class Dune {
     const json = await res.json()
 
     if (json.error) {
-      return { error: json.error }
+      return json as { error: string }
     }
 
     return { data: json as T }
