@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "author": "Greg Skriloff",
   "keywords": [
-    "Dune Analytics",
-    "Ethereum"
+    "dune",
+    "dune-analytics"
   ],
+  "description": "A minimal TypeScript client for interacting with the Dune API.",
   "repository": {
     "type": "git",
     "url": "https://github.com/gskril/dune.git"
