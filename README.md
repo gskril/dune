@@ -14,8 +14,8 @@ import { Dune } from 'dune-api-client'
 const dune = new Dune('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
 
 const execute = await dune.execute(3224138)
-const status = await dune.status(execute.execution_id)
-const res = await dune.results(execute.execution_id)
+const status = await dune.status(execute.data.execution_id)
+const res = await dune.results(execute.data.execution_id)
 ```
 
 The second approach is to read the latest results from a query, regardless of how it was executed (including on the Dune website).
@@ -38,7 +38,7 @@ type DuneData = {
 }
 
 const res = await dune.results<DuneData>(3224138)
-// res.result.rows will be of type DuneData[]
+// res.data.result.rows will be of type DuneData[]
 ```
 
 The `dune.execute` and `dune.results` methods support query params (text, number, and date).

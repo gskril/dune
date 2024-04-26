@@ -4,6 +4,7 @@ import {
   ExecutionResult,
   CancelQuery,
   ExecuteQueryOptions,
+  DataOrError,
 } from './types'
 
 export class Dune {
@@ -27,7 +28,7 @@ export class Dune {
     method: 'GET' | 'POST',
     endpoint: string,
     body?: { query_parameters?: ExecuteQueryOptions['params'] }
-  ): Promise<T> {
+  ): Promise<DataOrError<T>> {
     const res = await fetch(endpoint, {
       method,
       headers: {
@@ -36,8 +37,13 @@ export class Dune {
       body: method === 'POST' ? JSON.stringify(body) : undefined,
     })
 
-    const json = (await res.json()) as T
-    return json
+    const json = await res.json()
+
+    if (json.error) {
+      return json as { error: string }
+    }
+
+    return { data: json as T }
   }
 
   /**
@@ -48,7 +54,7 @@ export class Dune {
   async execute(
     query_id: number,
     options?: ExecuteQueryOptions
-  ): Promise<ExecuteQuery> {
+  ): Promise<DataOrError<ExecuteQuery>> {
     const endpoint = this.BASE_URL + '/query/' + query_id + '/execute'
     const body = { query_parameters: options?.params }
     return await this.fetchDune<ExecuteQuery>('POST', endpoint, body)
@@ -59,7 +65,7 @@ export class Dune {
    * @param execution_id Dune execution id
    * @returns Success of cancellation
    */
-  async cancel(execution_id: string): Promise<CancelQuery> {
+  async cancel(execution_id: string): Promise<DataOrError<CancelQuery>> {
     const endpoint = this.BASE_URL + '/execution/' + execution_id + '/cancel'
     return await this.fetchDune<CancelQuery>('POST', endpoint)
   }
@@ -69,7 +75,7 @@ export class Dune {
    * @param execution_id Dune execution id
    * @returns Status of execution
    */
-  async status(execution_id: string): Promise<ExecutionStatus> {
+  async status(execution_id: string): Promise<DataOrError<ExecutionStatus>> {
     const endpoint = this.BASE_URL + '/execution/' + execution_id + '/status'
     return await this.fetchDune<ExecutionStatus>('GET', endpoint)
   }
@@ -82,7 +88,7 @@ export class Dune {
   async results<T>(
     exec_or_query_id: string | number,
     options?: ExecuteQueryOptions
-  ): Promise<ExecutionResult<T>> {
+  ): Promise<DataOrError<ExecutionResult<T>>> {
     const isIdNumber = /^\d+$/.test(exec_or_query_id.toString())
     let endpoint: string
 

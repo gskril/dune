@@ -8,8 +8,11 @@ type QueryState =
 
 interface ResultMetadata {
   column_names: string[]
+  column_types: string[]
+  row_count: number
   result_set_bytes: number
   total_row_count: number
+  total_result_set_bytes: number
   datapoint_count: number
   pending_time_millis: number
   execution_time_millis: number
@@ -36,6 +39,7 @@ export interface CancelQuery {
 export interface ExecutionStatus {
   execution_id: string
   query_id: number
+  is_execution_finished: boolean
   state: QueryState
   submitted_at: string
 
@@ -49,6 +53,7 @@ export interface ExecutionStatus {
 export interface ExecutionResult<T> {
   execution_id: string
   query_id: number
+  is_execution_finished: boolean
   state: QueryState
   submitted_at: string
 
@@ -58,3 +63,7 @@ export interface ExecutionResult<T> {
   execution_ended_at?: string
   result?: ExecutionResultData<T>
 }
+
+export type DataOrError<T> =
+  | { data: T; error?: undefined }
+  | { data?: undefined; error: string }
