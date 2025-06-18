@@ -6,7 +6,8 @@
     "outDir": "./dist",
     "moduleResolution": "node",
     "declaration": true,
-    "strict": true
+    "strict": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["./src/**/*.ts"]
 }

@@ -17,13 +17,17 @@
     "build": "tsc",
     "clean": "rm -rf ./dist",
     "prepack": "yarn run build",
-    "prepublishOnly": "yarn version --patch"
+    "prepublishOnly": "yarn version --patch",
+    "test": "node --import tsx --test src/**/*test.ts"
   },
   "type": "module",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^20.11.0",
-    "typescript": "^5.3.3"
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/node": "^24.0.3",
+    "prettier": "^3.5.3",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
   }
 }
