@@ -1,10 +1,10 @@
 import {
-  ExecuteQuery,
-  ExecutionStatus,
-  ExecutionResult,
   CancelQuery,
-  ExecuteQueryOptions,
   DataOrError,
+  ExecuteQuery,
+  ExecuteQueryOptions,
+  ExecutionResult,
+  ExecutionStatus,
 } from './types'
 
 export class Dune {
