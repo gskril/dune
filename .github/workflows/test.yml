@@ -24,3 +24,5 @@ jobs:
 
       - name: Run tests
         run: yarn test
+        env:
+          DUNE_API_KEY: ${{ secrets.DUNE_API_KEY }}
