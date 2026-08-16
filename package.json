@@ -24,7 +24,7 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/node": "^24.0.3",
     "dotenv": "^16.5.0",
     "prettier": "^3.5.3",
