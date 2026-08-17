@@ -17,7 +17,7 @@ test('should return data from a query', async () => {
   const res = await dune.results<DuneData>(3224138) // Top 100 Farcaster users by followers
 
   // We're expecting "dwr.eth" and "vitalik.eth" to be in the array, each with >400k followers
-  const targetUsernames = ['dwr.eth', 'vitalik.eth']
+  const targetUsernames = ['dwr', 'vitalik.eth']
   const targetUsers = res.data?.result?.rows.filter((row) =>
     targetUsernames.includes(row.username)
   )
