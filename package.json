@@ -16,19 +16,17 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "prepack": "yarn run build",
-    "prepublishOnly": "yarn version --patch",
-    "test": "node --import tsx --test src/**/*test.ts"
+    "prepack": "bun run build",
+    "prepublishOnly": "bun pm version patch",
+    "test": "bun test"
   },
   "type": "module",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-    "@types/node": "^24.0.3",
-    "dotenv": "^16.5.0",
+    "@types/bun": "^1.3.14",
     "prettier": "^3.5.3",
-    "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   }
 }

@@ -1,13 +1,9 @@
-import 'dotenv/config'
-import assert from 'node:assert'
-import { test } from 'node:test'
+import { expect, test } from 'bun:test'
 
 import { Dune } from '.'
 
 test('should throw an error if no API key is provided', () => {
-  assert.throws(() => {
-    new Dune('')
-  })
+  expect(() => new Dune('')).toThrow()
 })
 
 test('should return data from a query', async () => {
@@ -26,11 +22,9 @@ test('should return data from a query', async () => {
     targetUsernames.includes(row.username)
   )
 
-  assert.strictEqual(targetUsers?.length, 2)
-  for (const user of targetUsers) {
-    assert.ok(
-      user.followers > 400_000,
-      `Expected ${user.username} to have >400k followers`
-    )
+  expect(targetUsers?.length).toBe(2)
+
+  for (const user of targetUsers ?? []) {
+    expect(user.followers).toBeGreaterThan(400_000)
   }
 })

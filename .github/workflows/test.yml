@@ -13,16 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Use Node.js 22.x
-        uses: actions/setup-node@v7
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: '22.x'
-          cache: 'yarn'
+          bun-version: latest
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run build
 
       - name: Run tests
-        run: yarn test
+        run: bun test
         env:
           DUNE_API_KEY: ${{ secrets.DUNE_API_KEY }}
